@@ -1,4 +1,6 @@
-# This is a sample Python script.
+import PySimpleGUI as sg
+from pathlib import Path
+
 
 def rename_file(file: Path, part_to_remove: str, part_to_add: str):
     """
@@ -26,8 +28,33 @@ def rename_all_files(directory: Path, old_part: str, new_part: str):
         rename_file(file, old_part, new_part)
 
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+def main():
+    sg.theme('DarkAmber')
+    layout = [
+        [sg.Text('Enter the path to the file you want to rename')],
+        [sg.InputText(), sg.FolderBrowse(key="-BROWSE-")],
+        [sg.Text('Enter the part to remove from the name')],
+        [sg.InputText(key="-OLD_PART-")],
+        [sg.Text('Enter the new name')],
+        [sg.InputText(key="-NEW_PART-")],
+        [sg.Button('Rename files'), sg.Button('Exit')]
+    ]
+    window = sg.Window('Rename', layout)
+    while True:
+        event, values = window.read()
+        if event in (None, 'Exit'):
+            break
+        if event == 'Rename files':
+            path = Path(values["-BROWSE-"])
+            old_part = values["-OLD_PART-"]
+            new_part = values["-NEW_PART-"]
+            print(path)
+            print(old_part)
+            print(new_part)
+            rename_all_files(path, old_part, new_part)
+    window.close()
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+
+if __name__ == '__main__':
+    main()
+
