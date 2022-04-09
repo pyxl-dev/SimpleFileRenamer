@@ -1,7 +1,17 @@
 # This is a sample Python script.
 
-# Press Maj+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+def rename_file(file: Path, part_to_remove: str, part_to_add: str):
+    """
+    Rename a file with the new name
+    :param file: Path to the file
+    :param part_to_remove: Part of the filename to remove
+    :param part_to_add: Part of the filename to add
+    :return:
+    """
+    new_name = file.name.replace(part_to_remove, part_to_add)
+    new_path = file.parent / new_name
+    file.rename(new_path)
+    return new_path
 
 
 def print_hi(name):
