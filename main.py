@@ -14,9 +14,16 @@ def rename_file(file: Path, part_to_remove: str, part_to_add: str):
     return new_path
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+def rename_all_files(directory: Path, old_part: str, new_part: str):
+    """
+    Rename all files in a directory
+    :param directory: Path to the directory
+    :param old_part: Part of the filename to remove
+    :param new_part: Part of the filename to add
+    :return:
+    """
+    for file in directory.iterdir():
+        rename_file(file, old_part, new_part)
 
 
 # Press the green button in the gutter to run the script.
